@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 // =========================================================
 
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static('Public'));
 app.use(logger);
 
 app.use((req, res, next) => {
