@@ -842,7 +842,7 @@
 
                 <div class="data-card-header">
                     <div>
-                        <h2>Liste des emprunts</h2>
+                        <h2>Liste des emprunts</h2> <br>  
                         <span class="data-count" id="nombreEmprunts">0 emprunt</span>
                     </div>
                 </div>
@@ -1218,8 +1218,60 @@
     ====================================== -->
 
     <script src="app.js"></script>
+    <div class="modal" id="modalHistoriqueAdherent">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>Historique des emprunts</h2>
+                <p id="nomHistoriqueAdherent">
+                    Historique de l'adhérent
+                </p>
+            </div>
+
+            <button
+                class="modal-close"
+                id="fermerModalHistorique"
+            >
+                <i class="fi-rr-cross"></i>
+            </button>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Livre</th>
+                        <th>Date d'emprunt</th>
+                        <th>Retour prévu</th>
+                        <th>Date de retour</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+
+                <tbody id="historiqueAdherentTableBody">
+
+                    <tr>
+                        <td colspan="5" style="text-align: center;">
+                            Chargement...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 
 </html>
-```

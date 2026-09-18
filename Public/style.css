@@ -1395,7 +1395,9 @@ tbody tr:hover {
     justify-content: center;
     z-index: 1000;
 }
-
+.modal.flex {
+    display: flex;
+}
 .modal-content {
     width: 500px;
     max-width: 90%;

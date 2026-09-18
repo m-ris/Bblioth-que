@@ -1604,6 +1604,14 @@ async function chargerAdherents() {
                             </button>
 
                             <button
+                                class="table-action-button btn-historique-adherent"
+                                data-id="${adherent.id}"
+                                title="Historique des emprunts"
+                            >
+                                <i class="fi-rr-time-past"></i>
+                            </button>
+
+                            <button
                                 class="table-action-button btn-supprimer-adherent"
                                 data-id="${adherent.id}"
                                 title="Supprimer"
@@ -2210,6 +2218,13 @@ async function chargerEmprunts() {
         const tbody =
             document.getElementById('empruntsTableBody');
 
+            const nombreEmprunts =
+            document.getElementById('nombreEmprunts');
+
+        if (nombreEmprunts) {
+            nombreEmprunts.textContent =
+                `${emprunts.length} emprunt${emprunts.length > 1 ? 's' : ''}`;
+        }
 
         if (!tbody) {
             return;
@@ -2963,3 +2978,153 @@ if (btnEnregistrerProfil) {
         alert('Profil enregistré avec succès.');
     });
 }
+document.addEventListener('click', async (event) => {
+
+    const bouton =
+        event.target.closest('.btn-historique-adherent');
+
+    if (!bouton) {
+        return;
+    }
+
+    const adherentId =
+        bouton.dataset.id;
+
+    const modal =
+        document.getElementById(
+            'modalHistoriqueAdherent'
+        );
+
+    const tbody =
+        document.getElementById(
+            'historiqueAdherentTableBody'
+        );
+
+    try {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align: center;">
+                    Chargement...
+                </td>
+            </tr>
+        `;
+
+     modal.classList.add('flex');
+
+console.log('MODAL HISTORIQUE OUVERT', modal);
+
+        const response =
+            await fetch(
+                `/api/adherents/${adherentId}/emprunts`
+            );
+
+        if (!response.ok) {
+            throw new Error(
+                'Erreur lors du chargement de l’historique.'
+            );
+        }
+
+        const historique =
+            await response.json();
+
+        if (historique.length === 0) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align: center;">
+                        Aucun emprunt dans l'historique.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+        tbody.innerHTML = '';
+
+        historique.forEach((emprunt) => {
+
+            const ligne =
+                document.createElement('tr');
+
+            const dateEmprunt =
+                emprunt.date_emprunt
+                    ? new Date(
+                        emprunt.date_emprunt
+                    ).toLocaleDateString('fr-FR')
+                    : '-';
+
+            const dateRetourPrevue =
+                emprunt.date_retour_prevue
+                    ? new Date(
+                        emprunt.date_retour_prevue
+                    ).toLocaleDateString('fr-FR')
+                    : '-';
+
+            const dateRetour =
+                emprunt.date_retour
+                    ? new Date(
+                        emprunt.date_retour
+                    ).toLocaleDateString('fr-FR')
+                    : '-';
+
+            let statut = '';
+
+            if (emprunt.statut_emprunt === 'retourne') {
+                statut = `
+                    <span class="status-badge status-success">
+                        Retourné
+                    </span>
+                `;
+            } else if (
+                emprunt.statut_emprunt === 'en_retard'
+            ) {
+                statut = `
+                    <span class="status-badge status-danger">
+                        En retard
+                    </span>
+                `;
+            } else {
+                statut = `
+                    <span class="status-badge status-warning">
+                        En cours
+                    </span>
+                `;
+            }
+
+            ligne.innerHTML = `
+                <td>
+                    <strong>
+                        ${emprunt.livre_titre}
+                    </strong>
+                </td>
+
+                <td>${dateEmprunt}</td>
+
+                <td>${dateRetourPrevue}</td>
+
+                <td>${dateRetour}</td>
+
+                <td>${statut}</td>
+            `;
+
+            tbody.appendChild(ligne);
+        });
+
+    } catch (error) {
+
+        console.error(
+            'Erreur historique adhérent :',
+            error
+        );
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align: center;">
+                    Impossible de charger l'historique.
+                </td>
+            </tr>
+        `;
+    }
+});

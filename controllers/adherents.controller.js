@@ -130,11 +130,43 @@ const deleteAdherent = async (req, res) => {
         });
     }
 };
+const getHistoriqueEmprunts = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const result = await pool.query(`
+            SELECT
+                emprunts.id,
+                emprunts.date_emprunt,
+                emprunts.date_retour_prevue,
+                emprunts.date_retour,
+                livres.titre AS livre_titre,
+                CASE
+                    WHEN emprunts.date_retour IS NOT NULL THEN 'retourne'
+                    WHEN emprunts.date_retour_prevue < CURRENT_DATE THEN 'en_retard'
+                    ELSE 'en_cours'
+                END AS statut_emprunt
+            FROM emprunts
+            JOIN livres
+                ON emprunts.livre_id = livres.id
+            WHERE emprunts.adherent_id = $1
+            ORDER BY emprunts.date_emprunt DESC
+        `, [id]);
+
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: 'Erreur lors de la récupération de l’historique des emprunts'
+        });
+    }
+};
 
 module.exports = {
     getAdherents,
     getAdherentById,
     createAdherent,
     updateAdherent,
-    deleteAdherent
+    deleteAdherent,
+    getHistoriqueEmprunts
 };

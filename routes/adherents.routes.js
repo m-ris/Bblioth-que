@@ -5,7 +5,8 @@ const {
     getAdherentById,
     createAdherent,
     updateAdherent,
-    deleteAdherent
+    deleteAdherent,
+    getHistoriqueEmprunts
 } = require('../controllers/adherents.controller');
 
 const { validateRequired } = require('../middlewares/validation.middleware');
@@ -13,6 +14,7 @@ const { validateRequired } = require('../middlewares/validation.middleware');
 const router = express.Router();
 
 router.get('/', getAdherents);
+router.get('/:id/emprunts', getHistoriqueEmprunts);
 router.get('/:id', getAdherentById);
 
 router.post(
