@@ -1,0 +1,1225 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bibliothèque - Tableau de bord</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Flaticon UIcons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    >
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- =====================================
+             SIDEBAR
+        ====================================== -->
+
+        <aside class="sidebar">
+
+            <!-- LOGO -->
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    <i class="fi-rr-book-alt"></i>
+                </div>
+
+                <div class="logo-text">
+                    <strong>Biblio-Gestion</strong>
+                    <span> </span>
+                </div>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="sidebar-nav">
+
+                <p class="nav-title">
+                    MENU PRINCIPAL
+                </p>
+
+                <button class="nav-item active" id="navDashboard">
+                    <i class="fi-rr-home"></i>
+                    <span>
+                        Dashboard
+                    </span>
+                </button>
+
+
+               <button class="nav-item" id="navLivres">
+                    <i class="fi-rr-book"></i>
+                    <span>
+                        Livres
+                    </span>
+                </button>
+
+
+                <button class="nav-item" id="navAuteurs">
+                    <i class="fi-rr-user-pen"></i>
+                    <span>
+                        Auteurs
+                    </span>
+                </button>
+
+
+               
+                <button class="nav-item" id="navAdherents">
+                    <i class="fi-rr-users"></i>
+                    <span>
+                        Adhérents
+                    </span>
+                </button>
+
+
+                <button class="nav-item" id="navEmprunts">
+
+                    <i class="fi-rr-exchange"></i>
+
+                    <span>
+                        Emprunts
+                    </span>
+
+                </button>
+
+
+                <p class="nav-title nav-title-bottom">
+                    AUTRES
+                </p>
+
+
+                <button class="nav-item" id="navParametres">
+                    <i class="fi-rr-settings"></i>
+                    <span>
+                        Paramètres
+                    </span>
+
+                </button>
+
+            </nav>
+
+
+            <!-- BAS DE SIDEBAR -->
+
+            <div class="sidebar-bottom">
+
+                <div class="help-box">
+
+                    <div class="help-icon">
+                        <i class="fi-rr-interrogation"></i>
+                    </div>
+
+                    <div>
+                        <strong>Besoin d'aide ?</strong>
+
+                        <span>
+                            Contactez votre administrateur 
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =====================================
+             CONTENU PRINCIPAL
+        ====================================== -->
+
+        <main class="main-content">
+
+
+            <!-- =================================
+                 TOPBAR
+            ================================== -->
+
+            <header class="topbar">
+
+
+                <!-- RECHERCHE -->
+
+                <div class="search-box">
+
+                    <i class="fi-rr-search"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Rechercher..."
+                    >
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="topbar-actions">
+
+
+                    <!-- NOTIFICATIONS -->
+
+                    <button class="topbar-button">
+
+                        <i class="fi-rr-bell"></i>
+
+                        <span class="notification-dot"></span>
+
+                    </button>
+
+
+                    <!-- SEPARATEUR -->
+
+                    <div class="topbar-separator"></div>
+
+
+                    <!-- UTILISATEUR -->
+
+                    <div class="user-profile">
+
+                        <div class="user-avatar">
+                            <i class="fi-rr-user"></i>
+                        </div>
+
+                        <div class="user-info">
+
+                            <strong>
+                                Bibliothécaire
+                            </strong>
+
+                            <span>
+                                Administrateur
+                            </span>
+
+                        </div>
+
+                        <i class="fi-rr-angle-small-down user-arrow"></i>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- =================================
+                 DASHBOARD
+            ================================== -->
+        <section class="dashboard" id="dashboardPage">
+
+
+                <!-- =================================
+                     header dash
+                ================================== -->
+
+                <div class="dashboard-header">
+
+                    <div class="dashboard-title">
+
+                        <span class="page-label">
+                            TABLEAU DE BORD
+                        </span>
+
+                        <h1>
+                            Bonjour, bienvenue 
+                        </h1>
+
+                        <p>
+                            Voici un aperçu de l'activité de votre bibliothèque.
+                        </p>
+
+                    </div>
+
+
+                    <!-- affichement de la date -->
+
+                    <div class="date-box">
+
+                        <i class="fi-rr-calendar"></i>
+
+                        <span id="currentDate">
+                            Chargement...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================
+                     STATISTIQUES
+                ================================== -->
+
+                <div class="stats-grid">
+
+
+                    <!-- affichement des livres -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon books-icon">
+                                <i class="fi-rr-book"></i>
+                            </div>
+
+                            <span class="stat-label">
+                                Livres
+                            </span>
+
+                        </div>
+
+                        <div class="stat-number">
+
+                            <strong id="totalLivres">
+                                0
+                            </strong>
+
+                        </div>
+
+                        <div class="stat-footer">
+
+                            <i class="fi-rr-arrow-up"></i>
+
+                            <span>
+                                Total des livres
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- affichement adhérents -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon members-icon">
+                                <i class="fi-rr-users"></i>
+                            </div>
+
+                            <span class="stat-label">
+                                Adhérents
+                            </span>
+
+                        </div>
+
+                        <div class="stat-number">
+
+                            <strong id="totalAdherents">
+                                0
+                            </strong>
+
+                        </div>
+
+                        <div class="stat-footer">
+
+                            <i class="fi-rr-arrow-up"></i>
+
+                            <span>
+                                Membres inscrits
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- affichages des emprunts  -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon loans-icon">
+                                <i class="fi-rr-exchange"></i>
+                            </div>
+
+                            <span class="stat-label">
+                                Emprunts en cours
+                            </span>
+
+                        </div>
+
+                        <div class="stat-number">
+
+                            <strong id="empruntsEnCours">
+                                0
+                            </strong>
+
+                        </div>
+
+                        <div class="stat-footer">
+
+                            <i class="fi-rr-book-arrow-up"></i>
+
+                            <span>
+                                Livres actuellement empruntés
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- liste des retards des livres -->
+
+                    <div class="stat-card overdue-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon overdue-icon">
+                                <i class="fi-rr-triangle-warning"></i>
+                            </div>
+
+                            <span class="stat-label">
+                                En retard
+                            </span>
+
+                        </div>
+
+                        <div class="stat-number">
+
+                            <strong id="empruntsEnRetard">
+                                0
+                            </strong>
+
+                        </div>
+
+                        <div class="stat-footer">
+
+                            <i class="fi-rr-clock"></i>
+
+                            <span>
+                                Emprunts à surveiller
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================
+                     info importnts
+                ================================== -->
+
+                <div class="dashboard-grid">
+
+
+                    <!-- LIVRE LE PLUS EMPRUNTÉ -->
+
+                    <div class="info-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    POPULARITÉ
+                                </span>
+
+                                <h2>
+                                    Livre le plus emprunté
+                                </h2>
+
+                            </div>
+
+                            <div class="card-icon">
+                                <i class="fi-rr-book"></i>
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="livrePlusEmprunte"
+                            class="card-result"
+                        >
+                            Chargement...
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ADHÉRENT LE PLUS ACTIF -->
+
+                    <div class="info-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    ACTIVITÉ
+                                </span>
+
+                                <h2>
+                                    Adhérent le plus actif
+                                </h2>
+
+                            </div>
+
+                            <div class="card-icon">
+                                <i class="fi-rr-trophy"></i>
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="adherentPlusActif"
+                            class="card-result"
+                        >
+                            Chargement...
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================
+                     EMPRUNTS RÉCENTS
+                ================================== -->
+
+                <div class="recent-card">
+
+
+                    <!-- HEADER -->
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="card-label">
+                                ACTIVITÉ RÉCENTE
+                            </span>
+
+                            <h2>
+                                Emprunts récents
+                            </h2>
+
+                        </div>
+
+
+                        <button class="view-button">
+
+                            <span>
+                                Voir tous les emprunts
+                            </span>
+
+                            <i class="fi-rr-arrow-right"></i>
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- TABLE -->
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Livre
+                                    </th>
+
+                                    <th>
+                                        Adhérent
+                                    </th>
+
+                                    <th>
+                                        Date d'emprunt
+                                    </th>
+
+                                    <th>
+                                        Retour prévu
+                                    </th>
+
+                                    <th>
+                                        Statut
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="recentLoans">
+
+                                <tr>
+
+                                    <td colspan="5">
+
+                                        <div class="table-loading">
+
+                                            <i class="fi-rr-spinner"></i>
+
+                                            <span>
+                                                Chargement des emprunts...
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+            </section>
+            
+        <!-- =====================================================
+     PAGE LIVRES
+===================================================== -->
+
+            <section class="page-section" id="livresPage">
+
+                <div class="page-section-header">
+
+                    <div>
+                        <span class="page-label">
+                            GESTION DE LA BIBLIOTHÈQUE
+                        </span>
+
+                        <h1>Livres</h1>
+
+                        <p>
+                            Consultez et gérez les livres de votre bibliothèque.
+                        </p>
+                    </div>
+
+                    <button class="primary-button" id="btnAjouterLivre">
+
+                        <i class="fi-rr-plus"></i>
+
+                        <span>Ajouter un livre</span>
+
+                    </button>
+
+                </div>
+
+
+                <div class="page-toolbar">
+
+                    <div class="page-search">
+
+                        <i class="fi-rr-search"></i>
+
+                        <input
+                            type="text"
+                            id="rechercheLivre"
+                            placeholder="Rechercher un livre ou un auteur..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="data-card">
+
+                    <div class="data-card-header">
+
+                        <div>
+
+                            <span class="card-label">
+                                CATALOGUE
+                            </span>
+
+                            <h2>Liste des livres</h2>
+
+                        </div>
+
+                        <span
+                            id="nombreLivres"
+                            class="data-count"
+                        >
+                            0 livre
+                        </span>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Titre</th>
+                                    <th>Auteur</th>
+                                    <th>Année</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="livresTableBody">
+
+                                <tr>
+
+                                    <td colspan="6">
+
+                                        <div class="table-loading">
+
+                                            <i class="fi-rr-spinner"></i>
+
+                                            <span>
+                                                Chargement des livres...
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div class="pagination">
+
+                        <button
+                            class="pagination-button"
+                            id="btnPagePrecedente"
+                            disabled
+                        >
+                            <i class="fi-rr-angle-left"></i>
+                        </button>
+
+                        <span id="paginationInfo">
+                            Page 1
+                        </span>
+
+                        <button
+                            class="pagination-button"
+                            id="btnPageSuivante"
+                        >
+                            <i class="fi-rr-angle-right"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>    
+        <section class="page-section" id="adherentsPage" style="display: none;">
+
+    <div class="page-section-header">
+
+        <div>
+            <h1>Adhérents</h1>
+            <p>Gérez les adhérents de la bibliothèque.</p>
+        </div>
+
+        <button class="primary-button" id="btnAjouterAdherent">
+            <i class="fi-rr-plus"></i>
+            Ajouter un adhérent
+        </button>
+
+    </div>
+
+
+    <div class="page-toolbar">
+
+        <div class="data-count">
+            <span id="nombreAdherents">0 adhérent</span>
+        </div>
+
+    </div>
+
+
+    <div class="data-card">
+
+        <div class="data-card-header">
+            <div>
+                <h2>Liste des adhérents</h2>
+                <p>Retrouvez tous les adhérents enregistrés.</p>
+            </div>
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Nom</th>
+                        <th>Contact</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="adherentsTableBody">
+                    <!-- Les adhérents seront chargés ici -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+        </section>
+    
+<!-- PAGE EMPRUNTS -->
+        <section class="page-section" id="empruntsPage" style="display: none;">
+
+            <div class="page-section-header">
+                <div>
+                    <h1>Emprunts</h1>
+                    <p>Gérez les emprunts et les retours de livres.</p>
+                </div>
+
+                <button class="primary-button" id="btnAjouterEmprunt">
+                    <i class="fi-rr-plus"></i>
+                    Nouvel emprunt
+                </button>
+            </div>
+
+            <div class="page-toolbar">
+
+                <div class="page-search">
+                    <i class="fi-rr-search"></i>
+                    <input
+                        type="text"
+                        id="rechercheEmprunt"
+                        placeholder="Rechercher un emprunt..."
+                    >
+                </div>
+
+            </div>
+
+            <div class="data-card">
+
+                <div class="data-card-header">
+                    <div>
+                        <h2>Liste des emprunts</h2>
+                        <span class="data-count" id="nombreEmprunts">0 emprunt</span>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Adhérent</th>
+                                <th>Livre</th>
+                                <th>Date d'emprunt</th>
+                                <th>Retour prévu</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="empruntsTableBody">
+                            <tr>
+                                <td colspan="7" style="text-align: center;">
+                                    Chargement...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </section>
+
+            <section class="page-section" id="auteursPage" style="display: none;">
+
+                <div class="page-section-header">
+                    <div>
+                        <h1>Auteurs</h1>
+                        <p>Gérez les auteurs de la bibliothèque.</p>
+                    </div>
+
+                    <button class="primary-button" id="btnAjouterAuteur">
+                        <i class="fi-rr-plus"></i>
+                        Ajouter un auteur
+                    </button>
+                </div>
+
+                <div class="data-card">
+
+                    <div class="data-card-header">
+                        <div>
+                            <h2>Liste des auteurs</h2>
+                            <span class="data-count" id="nombreAuteurs">0 auteur</span>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Nom</th>
+                                    <th>Nationalité</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="auteursTableBody">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="table-loading">
+                                            Chargement des auteurs...
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal" id="modalAuteur">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <div>
+                            <h2>Ajouter un auteur</h2>
+                            <p>Renseignez les informations de l'auteur.</p>
+                        </div>
+
+                        <button class="modal-close" id="fermerModalAuteur">
+                            <i class="fi-rr-cross"></i>
+                        </button>
+                    </div>
+
+                    <form id="formAuteur">
+
+                        <div class="form-group">
+                            <label for="nomAuteur">Nom de l'auteur</label>
+                            <input
+                                type="text"
+                                id="nomAuteur"
+                                placeholder="Ex. Victor Hugo"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nationaliteAuteur">Nationalité</label>
+                            <input
+                                type="text"
+                                id="nationaliteAuteur"
+                                placeholder="Ex. Française"
+                            >
+                        </div>
+
+                        <div class="modal-actions">
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                id="annulerAuteur"
+                            >
+                                Annuler
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                            >
+                                <i class="fi-rr-plus"></i>
+                                Ajouter
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+</div>
+            </section>
+            <section class="page-section" id="parametresPage" style="display: none;">
+                <div class="page-section-header">
+                    <div>
+                        <h1>Paramètres</h1>
+                        <p>Configurez les informations de votre bibliothèque.</p>
+                    </div>
+                </div>
+
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        <div>
+                            <h2>Informations de la bibliothèque</h2>
+                            <span>Gérez les informations générales de l'application.</span>
+                        </div>
+                    </div>
+
+                    <div style="padding: 25px;">
+                        <div class="form-group">
+                            <label for="nomBibliotheque">Nom de la bibliothèque</label>
+                            <input
+                                type="text"
+                                id="nomBibliotheque"
+                                value="Bibliothèque"
+                                placeholder="Nom de la bibliothèque"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descriptionBibliotheque">Description</label>
+                            <input
+                                type="text"
+                                id="descriptionBibliotheque"
+                                value="Gestion de la bibliothèque"
+                                placeholder="Description"
+                            >
+                        </div>
+
+                        <button class="primary-button" id="btnEnregistrerParametres">
+                            <i class="fi-rr-check"></i>
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+                <div class="data-card">
+    <div class="data-card-header">
+        <div>
+            <h2>Mon profil</h2>
+            <span>Gérez vos informations personnelles.</span>
+        </div>
+    </div>
+
+    <div style="padding: 25px;">
+        <div class="form-group">
+            <label for="nomProfil">Nom</label>
+            <input
+                type="text"
+                id="nomProfil"
+                value="Administrateur"
+                placeholder="Votre nom"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="emailProfil">Adresse e-mail</label>
+            <input
+                type="email"
+                id="emailProfil"
+                placeholder="Votre adresse e-mail"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="telephoneProfil">Téléphone</label>
+            <input
+                type="tel"
+                id="telephoneProfil"
+                placeholder="Votre numéro de téléphone"
+            >
+        </div>
+
+        <button class="primary-button" id="btnEnregistrerProfil">
+            <i class="fi-rr-check"></i>
+            Enregistrer le profil
+        </button>
+    </div>
+</div>
+            </section>
+        </main>
+
+    </div>
+
+    <div class="modal" id="modalAdherent">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2>Ajouter un adhérent</h2>
+                    <p>Renseignez les informations de l'adhérent.</p>
+                </div>
+
+                <button class="modal-close" id="fermerModalAdherent">
+                    <i class="fi-rr-cross"></i>
+                </button>
+
+            </div>
+
+
+            <form id="formAdherent">
+
+                <div class="form-group">
+
+                    <label for="nomAdherent">
+                        Nom de l'adhérent
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomAdherent"
+                        placeholder="Ex. Jean Dupont"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="contactAdherent">
+                        Contact
+                    </label>
+
+                    <input
+                        type="text"
+                        id="contactAdherent"
+                        placeholder="Ex. 06 123 45 67"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="annulerAdherent"
+                    >
+                        Annuler
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        <i class="fi-rr-plus"></i>
+                        Ajouter
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    
+    <!-- MODAL NOUVEL EMPRUNT -->
+    <div class="modal" id="modalEmprunt">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div>
+                    <h2>Nouvel emprunt</h2>
+                    <p>Enregistrez un nouvel emprunt de livre.</p>
+                </div>
+
+                <button class="modal-close" id="fermerModalEmprunt">
+                    <i class="fi-rr-cross"></i>
+                </button>
+            </div>
+
+            <form id="formEmprunt">
+
+                <div class="form-group">
+                    <label for="adherentEmprunt">Adhérent</label>
+                    <select id="adherentEmprunt" required>
+                        <option value="">Sélectionnez un adhérent</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="livreEmprunt">Livre</label>
+                    <select id="livreEmprunt" required>
+                        <option value="">Sélectionnez un livre disponible</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dateRetourPrevue">Date de retour prévue</label>
+                    <input type="date" id="dateRetourPrevue" required>
+                </div>
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="annulerEmprunt">
+                        Annuler
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button">
+                        <i class="fi-rr-check"></i>
+                        Enregistrer
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
+```
